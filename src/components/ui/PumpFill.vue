@@ -54,10 +54,6 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-// Add any reactive logic here if needed
-</script>
-
 <style>
 .path-0 {
   animation: pathAnim-0 2s;
