@@ -6,7 +6,7 @@ import PriceRange from './components/ui/PriceRange.vue'
 </script>
 
 <template>
-  <div class="flex h-full gap-8 flex-wrap bg-gray-100 p-10">
+  <div class="flex h-full gap-8 flex-wrap bg-gray-100 p-10 justify-center items-center">
     <FlightDetails />
     <PumpFill />
     <TranslateLanguage />
