@@ -57,8 +57,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
-const amount = ref(100)
+import { ref, computed, onMounted } from 'vue'
+const amount = ref(0)
 
 const min = 0
 const max = 150
@@ -128,6 +128,12 @@ const decrement = () => {
 
 //  percentage of the selected amount between the min and max.
 const percentage = computed(() => Math.floor((amount.value / max) * 100))
+
+onMounted(() => {
+  setTimeout(() => {
+    amount.value = 100
+  }, 2000)
+})
 </script>
 
 <style></style>
