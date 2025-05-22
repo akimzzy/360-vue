@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
+const height = ref(0)
+
+onMounted(() => {
+  const interval = setInterval(() => {
+    if (height.value < 100) {
+      height.value += 2
+    } else {
+      clearInterval(interval)
+    }
+  }, 100)
+})
+</script>
 <template>
   <div
     class="bg-black rounded-[3.3rem] border-[6px] p-8 w-[320px] h-[320px] flex flex-col justify-between relative overflow-hidden"
@@ -12,25 +27,30 @@
 
       <div class="flex flex-col">
         <div class="text-white text-xl">Pump 3</div>
-        <div class="text-white/40 text-xl -mt-0.5">Filling in progress</div>
+        <div class="text-white/40 text-xl -mt-0.5">
+          {{ height == 100 ? 'Filling completed' : 'Filling in progress' }}
+        </div>
       </div>
     </div>
     <div class="flex flex-col justify-center items-center gap-8 z-10 text-xl text-white">
       <div class="">6.2 gal · 23.5 L</div>
-      <div class=""><span class="text-white/60">Filling:</span> Until full</div>
+      <div :class="height === 100 && `opacity-0`">
+        <span class="text-white/60">Filling:</span>
+        Until full
+      </div>
     </div>
 
     <!-- Wave Animation Background -->
     <div
       class="text-white absolute bottom-0 left-0 right-0 z-10 flex justify-center items-center h-full flex-col"
     >
-      <span class="font-bold leading-none text-[4rem]"> 50% </span>
+      <span class="font-bold leading-none text-[4rem]"> {{ height }}% </span>
     </div>
     <div
-      class="absolute bottom-0 left-0 right-0 transition-all duration-1000 ease-in-out flex flex-col"
-      :style="{ height: '50%' }"
+      class="absolute bottom-0 left-0 right-0 transition-all ease-in-out flex flex-col"
+      :style="{ height: height + '%' }"
     >
-      <div class="-mt-12 w-full">
+      <div class="-mt-12 w-full" :class="(height === 0 || height === 100) && `hidden`">
         <svg
           width="100%"
           height="100%"
